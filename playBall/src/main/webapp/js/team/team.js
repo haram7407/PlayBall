@@ -157,7 +157,7 @@ $("#btnDelete").click(function(){
 		url : "dismantleTeam.team",
 		success : function(resp){
 			if(resp.result == true){
-				alert("팀이 해체되엇습니다");
+				alert("팀이 해체되었습니다");
 				location.href = "./index.jsp" ;
 			} else {
 				alert("해체 실패");
@@ -281,6 +281,29 @@ team.acceptJoin = function(mid){
 		})
 }
 
+
+
+$("#photo").click(function(){
+	$("#image").click();
+})
+
+var pic=document.getElementById("image");
+
+//이미지 프리뷰하기
+function preview(ev) {
+	var files = ev.srcElement.files;
+	var reader = new FileReader();
+	reader.readAsDataURL(files[0]);
+	reader.onload = function(ev2) {
+		var img = new Image();
+		img.src = ev2.target.result;
+		$('#photo')[0].src=img.src;
+	}
+}
+
+pic.addEventListener("change",preview);
+
+
 team.rejectJoin = function(mid){
 	var frm = $('#frm_team')[0];
 	frm.mid.value = mid;
@@ -319,31 +342,7 @@ team.recordMove = function(nowPage){
 }
 
 
-$("#btnSelect").click(function(){
-	const form = document.frm_team;
-	const data = $(form).serialize();
-	$("#pageBox").load("./main.team",data);
-})
 
 
-$("#photo").click(function(){
-	$("#image").click();
-})
 
-
-var pic=document.getElementById("image");
-
-//이미지 프리뷰하기
-function preview(ev) {
-	var files = ev.srcElement.files;
-	var reader = new FileReader();
-	reader.readAsDataURL(files[0]);
-	reader.onload = function(ev2) {
-		var img = new Image();
-		img.src = ev2.target.result;
-		$('#photo')[0].src=img.src;
-	}
-}
-
-pic.addEventListener("change",preview);
 

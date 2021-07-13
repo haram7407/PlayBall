@@ -55,25 +55,6 @@
     width: 100%;
 }
 
-#btn_findstr, #btn_create,#reservationStatus,#myReservation{
-    background-color: #ffffff;
-    padding: 4px 10px;
-    color: rgb(80, 80, 80);
-    font-family:'VITRO PRIDE TTF';
-    border: 1px solid #aaa;
-    font-size: 15px;
-    font-weight: bold;
-    font-family:'VITRO PRIDE TTF';
-}
-
-#btn_findstr:hover, #btn_create:hover,#reservationStatus:hover,#myReservation:hover{
-	background-color:  rgb(240, 130, 71);
-    border:1px solid #000;
-    color:white;
-    cursor: pointer;
-    transition: all 0.5s;
-}
-
 figure.grid-item {
 font-family:'VITRO PRIDE TTF';
   position: relative;
@@ -187,6 +168,45 @@ figure.grid-item:hover p {
 padding:30px;
 }
 
+.stadiumlist{
+	width:100%;
+	display:flex;
+	height: 220px;
+	padding: 10px;
+	border-radius: 5px;
+	margin-top: 30px;
+}
+
+.stadiumlist:hover{
+	background-color: rgba(240, 130, 71, 0.4);
+	transition: background-color, 0.5s;
+}
+
+.stadiumlist .img{
+	width: 200px;
+	height: 200px;
+	overflow: hidden;
+}
+
+.stadiumlist .img .stadiumimg{
+	width: 200px;
+	height: auto;
+	background-position: center;
+   	background-size: cover;
+} 
+
+.list_items{
+	display:inline-block;
+	font-family: 'twayair';
+	left:0;
+}
+
+.item_name{ display:inline-block; width:200px; margin: 20px;
+font-size: 20px;}
+.item_doc{ display:inline-block; min-width:200px; margin: 20px;}
+.item_price{ display:inline-block; width:200px; margin: 20px;}
+.item_place{ display:inline-block; min-width:200px; margin: 20px;}
+
 #list_items span{
 	margin-top:15px;
 	word-break:break-all;
@@ -200,6 +220,25 @@ padding:30px;
 	display:inline-block;
 	float:right;
 	margin-top: 30px;
+}
+
+#btn_findstr, #btn_create,#reservationStatus,#myReservation{
+    background-color: #ffffff;
+    padding: 4px 10px;
+    color: rgb(80, 80, 80);
+    font-family:'VITRO PRIDE TTF';
+    border: 1px solid #aaa;
+    font-size: 15px;
+    font-weight: bold;
+    font-family:'VITRO PRIDE TTF';
+}
+
+#btn_findstr:hover, #btn_create:hover,#reservationStatus:hover,#myReservation:hover{
+	background-color:  rgb(240, 130, 71);
+    border:1px solid #000;
+    color:white;
+    cursor: pointer;
+    transition: all 0.5s;
 }
 
 #btn_create{

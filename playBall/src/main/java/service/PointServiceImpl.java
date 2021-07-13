@@ -12,8 +12,6 @@ PointMapper pointMapper;
 
 int r; 
 
-
-//로그인 포인트
 @Transactional
 public void loginPoint(String mid) {
 	

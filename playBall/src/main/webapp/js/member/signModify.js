@@ -65,16 +65,16 @@ $("#updateSign").click(function(){
 	   if( confirmPwd == false ) {
 		alert ( "새로운 비밀번호가 다릅니다" );
 	   } else if( newPasswordConfirmResult == false ) {
-		 alert( "비밀번호 형식을 맞춰주세요" );
+		 alert( "비밀번호 형식을 맞춰주세요." );
 	      $(form.password).focus();
 	   } else if( phoneConfirmResult == false ) {
-		 alert("핸드폰 형식을 맞춰주세요");
+		 alert("핸드폰 형식을 맞춰주세요.");
 	     $(form.phone).focus();
        } else if( emailConfirmResult == false ) {
-		 alert("이메일 형식을 맞춰주세요");
+		 alert("이메일 형식을 맞춰주세요.");
 	     $(form.email).focus();
 	   } else if( post == "" ) {
-		 alert("주소를 입력해주세요");
+		 alert("주소를 입력해주세요.");
 	     $(form.post).focus();
 	   } else {
 		
@@ -96,13 +96,13 @@ $("#updateSign").click(function(){
 	    })
 	   }      	
 	} else if( phoneConfirmResult == false ) {
-		 alert("핸드폰 형식을 맞춰주세요");
+		 alert("핸드폰 형식을 맞춰주세요.");
 	     $(form.phone).focus();
        } else if( emailConfirmResult == false ) {
-		 alert("이메일 형식을 맞춰주세요");
+		 alert("이메일 형식을 맞춰주세요~~");
 	     $(form.email).focus();
 	   } else if( post == "" ) {
-		 alert("주소를 입력해주세요");
+		 alert("주소를 입력해주세요~~");
 	     $(form.post).focus();
 	   } else {
 		

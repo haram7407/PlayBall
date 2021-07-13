@@ -16,7 +16,6 @@
     font-style: normal;
 }/*티웨이 하늘*/
 
-
 @font-face {
     font-family: 'twayfly';
     src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_tway@1.0/twayfly.woff') format('woff');
@@ -35,7 +34,7 @@
 	font-family:'VITRO PRIDE TTF';
 	display:inline-block;
 	width:100%;
-
+	background-color:rgb(252, 252, 252);
 }
 
 #main span{
@@ -228,9 +227,9 @@ span{
     margin: 0 4%;
 }
 
-.selectTime:hover{
+.selectTime:hover {
 	cursor : pointer;
-	background-color : #ff7f00;
+	background-color : #FF7F00;
 }
 .top #stadiumimg {
 	   width: 380px;

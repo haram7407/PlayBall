@@ -25,7 +25,7 @@
 		value="oracle.jdbc.driver.OracleDriver">
 		</property>
 		<property name="jdbcUrl"
-			value="jdbc:oracle:thin:@127.0.0.1:1521:XE"></property>
+			value="jdbc:oracle:thin:@localhost:1521:XE"></property>
 			<property name="username" value="hr"></property>
 			<property name="password" value="1111"></property>
 			<property name="maxLifetime" value="180000"></property>
@@ -67,18 +67,18 @@
    <constructor-arg ref="sqlSessionFactory"/>
 </bean>
 
-       <bean id="mailSender" class="org.springframework.mail.javamail.JavaMailSenderImpl">
-        <property name="host" value="smtp.gmail.com" /> <!-- gmail을 사용 -->
-        <property name="port" value="587" />
-        <property name="username" value="dongwon1923@gmail.com" />
-        <property name="password" value="dongdong1917@" />
-        <property name="javaMailProperties">
-            <props>
-                <prop key="mail.transport.protocol">smtp</prop>
-                <prop key="mail.smtp.auth">true</prop>
-                <prop key="mail.smtp.starttls.enable">true</prop>
-            </props>
-        </property>
+    <bean id="mailSender" class="org.springframework.mail.javamail.JavaMailSenderImpl">
+     <property name="host" value="smtp.gmail.com" /> <!-- gmail을 사용 -->
+     <property name="port" value="587" />
+     <property name="username" value="dongwon1923@gmail.com" />
+     <property name="password" value="dongdong1917@" />
+     <property name="javaMailProperties">
+         <props>
+             <prop key="mail.transport.protocol">smtp</prop>
+             <prop key="mail.smtp.auth">true</prop>
+             <prop key="mail.smtp.starttls.enable">true</prop>
+         </props>
+     </property>
     </bean>
  
    <bean id="mailSenderService" class="service.MailSenderServiceImpl"></bean>

@@ -44,10 +44,8 @@
 				</div>
 				<div id="map" style="width:73%;height:500px;margin:30px auto"></div>
 				<div id='btn_zone'>
-				<c:if test="${sessionScope.mid eq 'hong' }">
 				<input type='button' value='수정' id='btn_modify' onclick='brd.modify(${vo.serial})'>
 				<input type='button' value='삭제' id='btn_delete' onclick='brd.delete(${vo.serial})'>
-				</c:if>
 				<input type='hidden' id='place1' value='${vo.place1 }'>
 				<input type='hidden' id='place2' value='${vo.place2 }'>
 				</div>

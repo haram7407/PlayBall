@@ -15,8 +15,8 @@ import com.google.gson.JsonObject;
 import service.StadiumServiceImpl;
 import vo.Page;
 import vo.StadiumVo;
-import vo.reservationPageVo;
-import vo.reservationVo;
+import vo.ReservationPageVo;
+import vo.ReservationVo;
 
 @RestController
 public class StadiumController {
@@ -115,7 +115,7 @@ public class StadiumController {
   
   //예약 날 목록보기
   @RequestMapping(value="viewRvationDay.stadium",method= {RequestMethod.GET, RequestMethod.POST})
-  public ModelAndView viewRvationMonth(reservationVo vo,ModelAndView mv,@RequestParam("reservationId")String mid) {
+  public ModelAndView viewRvationMonth(ReservationVo vo,ModelAndView mv,@RequestParam("reservationId")String mid) {
       
 	  List<String> rvationDay = stadiumService.viewRvationDay(vo);
 	  String point = stadiumService.findUserPoint(mid);
@@ -129,9 +129,9 @@ public class StadiumController {
   
   //예약 시간 목록보기
   @RequestMapping(value="viewRvationTime.stadium",method= {RequestMethod.GET,RequestMethod.POST})
-  public ModelAndView viewRevationTiem(reservationVo vo,ModelAndView mv) {
+  public ModelAndView viewRevationTiem(ReservationVo vo,ModelAndView mv) {
       
-	  reservationVo sendVo = stadiumService.viewReservationTime(vo);
+	  ReservationVo sendVo = stadiumService.viewReservationTime(vo);
       
 	  mv.addObject("vo",sendVo);
 	  mv.setViewName("reservationTime");
@@ -141,7 +141,7 @@ public class StadiumController {
   
   //예약하기
   @RequestMapping(value="reservation.stadium",method= {RequestMethod.GET,RequestMethod.POST})
-  public String reservation(reservationVo vo) {
+  public String reservation(ReservationVo vo) {
 
 	  r = stadiumService.reservation(vo);
 	    
@@ -158,9 +158,9 @@ public class StadiumController {
    
   //유저예약 현황 보기
   @RequestMapping(value="moveMyReservation.stadium",method= {RequestMethod.GET,RequestMethod.POST})
-  public ModelAndView moveMyReservation(ModelAndView mv,reservationPageVo page) {
+  public ModelAndView moveMyReservation(ModelAndView mv,ReservationPageVo page) {
 	  
-	  List<reservationVo> list = stadiumService.moveMyReservation(page);
+	  List<ReservationVo> list = stadiumService.moveMyReservation(page);
 	  
 	  mv.addObject("list",list);
 	  mv.addObject("page",page);
@@ -171,7 +171,7 @@ public class StadiumController {
   
   //유저예약 삭제
   @RequestMapping(value="cancelReservation.stadium",method= {RequestMethod.GET,RequestMethod.POST})
-  public String cancelReservation(reservationVo vo) {
+  public String cancelReservation(ReservationVo vo) {
 	  
 	  r = stadiumService.cancelReservation(vo);
 	  

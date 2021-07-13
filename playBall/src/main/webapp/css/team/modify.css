@@ -25,9 +25,6 @@ font-family: 'VITRO PRIDE TTF';
     margin-top: 20px;
 }
 
-#image{
-	display:none;
-}
 
 #team #frm_team .img #photo{
 	width:100%;
@@ -71,6 +68,10 @@ font-family: 'VITRO PRIDE TTF';
 #btn_zone{
 	text-align:center;
 	margin-top: 50px;
+}
+
+#image{
+	display : noen;
 }
 
 input[type='button'],input[type='button']{

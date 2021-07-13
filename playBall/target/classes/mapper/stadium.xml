@@ -37,7 +37,7 @@
 		values(map_seq.nextval, '${name}', ${price}, '${doc}', '${tim}', '${address}', '${place1}', '${place2}', #{pic})
 	</insert>
 	
-	<insert id="reservationRecord" parameterType="vo.reservationVo">
+	<insert id="reservationRecord" parameterType="vo.ReservationVo">
 	INSERT INTO reservationRecord(stadiumserial,stadiumName,price,reservedDate,reservationMonth,reservationDay,reservationTime,reservationId)
 	VALUES (#{serial},#{stadiumName},#{price},sysdate,#{reservationMonth},#{reservationDay},#{reservationTime},#{reservationId})	
 	</insert>
@@ -60,11 +60,11 @@
 		UPDATE MAP SET name= '${name}', price=${price}, doc='${doc}', tim='${tim}', address='${address}', place1='${place1}', place2='${place2}',pic='${pic}' WHERE serial='${serial}'
 	</update>
 	
-	<update id="payment" parameterType="vo.reservationVo">
+	<update id="payment" parameterType="vo.ReservationVo">
 	   UPDATE MEMBER SET point = point - #{price} WHERE mid = #{reservationId}
 	</update>
 	
-	<update id="cancelPay" parameterType="vo.reservationVo">
+	<update id="cancelPay" parameterType="vo.ReservationVo">
 	   update member set point = point + #{price} where mid = #{reservationId}
 	</update>
 	
@@ -85,7 +85,7 @@
 	SELECT point FROM MEMBER WHERE mid = #{_parameter}
 	</select>
 	
-	<select id="viewRvationDay" parameterType="vo.reservationVo" resultType="String">
+	<select id="viewRvationDay" parameterType="vo.ReservationVo" resultType="String">
 	  <if test ="reservationMonth == 1 ">
 	  SELECT  d.reservationDay FROM RESERVATIONMONTH m LEFT JOIN RESERVATIONJan d ON 
       m.STADIUMSERIAL = d.stadiumSerial WHERE m.RESERVATIONMONTH  = d.reservationmonth and m.stadiumSerial = #{serial} order by TO_NUMBER(d.reservationDay)
@@ -128,7 +128,7 @@
 	 </if>
 	 <if test ="reservationMonth == 11 ">
 	  SELECT  d.reservationDay FROM RESERVATIONMONTH m LEFT JOIN RESERVATIONNov d ON 
-      m.STADIUMSERIAL = d.stadiumSerial WHERE m.RESERVATIONMONTH  = d.reservationmonth and m.stadiumSerial = #{serial} order by TO_NUMBER(d.reservationDay)
+      m.STADIUMSERIAL = d.stadiumSerial WHERE m.RESERVATIONMONTH  = d.reservationmonth and m.stadiumSerial = #{serial} order by TO_NUMBER(d.Day)
 	 </if>
 	 <if test ="reservationMonth == 12 ">
 	  SELECT  d.reservationDay FROM RESERVATIONMONTH m LEFT JOIN RESERVATIONDec d ON 
@@ -137,7 +137,7 @@
 	</select>
 	
 	
-	<select id="viewReservationTime" parameterType="vo.reservationVo" resultType="vo.reservationVo">
+	<select id="viewReservationTime" parameterType="vo.ReservationVo" resultType="vo.ReservationVo">
 	
 		<if test ="reservationMonth == 1">
 	SELECT  d.reservationTimeOne,d.reservationTimeTwo,d.reservationTimeThree,d.reservationTimeFour,d.reservationTimeFive,d.reservationTimeSix,
@@ -202,7 +202,7 @@
 	</if>
 	</select>
 	
-	<select id="myReservationTotList" parameterType="vo.reservationPageVo" resultType="Integer">
+	<select id="myReservationTotList" parameterType="vo.ReservationPageVo" resultType="Integer">
 	
 	  SELECT count(reservationId) FROM RESERVATIONRECORD  
 	  <if test="reservationId != 'hong' ">
@@ -210,7 +210,7 @@
 	  </if>
 	</select>
 	
-	<select id="moveMyReservation" parameterType="vo.reservationPageVo" resultType="vo.reservationVo">
+	<select id="moveMyReservation" parameterType="vo.ReservationPageVo" resultType="vo.ReservationVo">
 		SELECT stadiumSerial serial,stadiumName,reservationId,price,reservedDate,reservationMonth,reservationDay,reservationTime from(
 	    SELECT rownum rno,r.stadiumSerial,r.stadiumName,r.reservationId,r.price,r.reservedDate,r.reservationMonth,r.reservationDay,r.reservationTime From 
         (SELECT stadiumSerial,stadiumName,reservationId,price,to_char(reservedDate,'yyyy-mm-dd hh24:mi') reservedDate,reservationMonth,reservationDay,reservationTime FROM RESERVATIONRECORD 
@@ -221,7 +221,7 @@
 	</select>
 	
 	
-	<update id="reservation" parameterType="vo.reservationVo">
+	<update id="reservation" parameterType="vo.ReservationVo">
 		<if test="reservationMonth == 1 and reservationTime != null">
            UPDATE  RESERVATIONjan SET 
            <choose>
@@ -264,7 +264,7 @@
            </choose>
            WHERE stadiumserial = #{serial} AND reservationDay = #{reservationDay} 		
 		</if>
-		<if test="reservationMonth == 2 and reservationTime != null">
+		<if test="reservationMonth == 2 and Time != null">
 		    UPDATE  RESERVATIONFeb SET 
            <choose>
            <when test="reservationTime == '10:00' ">
@@ -729,7 +729,7 @@
 	</update>
 	
 	
-	<update id="cancelReservation" parameterType="vo.reservationVo">
+	<update id="cancelReservation" parameterType="vo.ReservationVo">
 		<if test="reservationMonth == 1 and reservationTime != null">
            UPDATE  RESERVATIONjan SET 
            <choose>
@@ -1237,14 +1237,14 @@
 	</update>
 		
 	
-	<delete id="cancelReservationRecord" parameterType="vo.reservationVo">
-	 DELETE FROM reservationRecord WHERE stadiumSerial= #{serial} AND reservationMonth = #{reservationMonth} AND reservationDay = #{reservationDay} 
+	<delete id="cancelReservationRecord" parameterType="vo.ReservationVo">
+	 DELETE FROM Record WHERE stadiumSerial= #{serial} AND reservationMonth = #{reservationMonth} AND reservationDay = #{reservationDay} 
 	 AND reservationTime = #{reservationTime} AND reservationId = #{reservationId}
 	</delete>
 	
 	
 	<select id="findRecord" parameterType="String" resultType="Integer">
-	  SELECT COUNT(STADIUMSERIAL) FROM RESERVATIONRECORD WHERE STADIUMSERIAL = #{_parameter}
+	  SELECT COUNT(STADIUMSERIAL) FROM RECORD WHERE STADIUMSERIAL = #{_parameter}
 	</select>
 	
 	<delete id="deleteReservationTable" parameterType="String" statementType="CALLABLE">

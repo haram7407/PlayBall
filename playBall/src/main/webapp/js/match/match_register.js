@@ -13,7 +13,7 @@ $("#saveBtn").click(function() {
     if( date == "" ) {
 	  alert("대결일은 필수 입니다.");
 	} else if(dDate < nowDate) {
-		alert("대결일은 현재일 전으로 하실 수 없습니다.")
+		alert("대결일은 현재일 전으로 하실수 없습니다.")
 	} else {
 	$.ajax({
 		type : "POST",
@@ -25,7 +25,7 @@ $("#saveBtn").click(function() {
 				alert("정상 등록 되었습니다.");
 				$("#pageBox").load("matchingView.matching");
 			} else {
-				alert("실패 새로고침 후 다시 해주세요");
+				alert("실패 새로고침후 다시 해주세요");
 			}
 		}
 	});
@@ -97,9 +97,6 @@ $(document).ready(function(){
           }
 	        });
 	});
-	
-
-	
 	
 	$("#summernote").on('drop',function(e){
     for(i=0; i< e.originalEvent.dataTransfer.files.length; i++){

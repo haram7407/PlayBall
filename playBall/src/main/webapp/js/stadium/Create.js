@@ -37,7 +37,7 @@ brd.home=function() {
 					     alert("정상적으로 등록되었습니다");
 					     $("#pageBox").load("search.stadium");
 				      } else { 
-					     alert("등록오류");
+					     alert("등록 실패");
 				      }
 			      }
 		        })

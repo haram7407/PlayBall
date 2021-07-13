@@ -34,12 +34,12 @@
 				})
 	       }	
 	})
-
 }
 
-$("#image_preview").click(function(){
+//파일태그 열기
+$("#image_preview").click(function() {
 	$("#attfile").click();
-})
+});
 
 
 var pic=document.getElementById("attfile");

@@ -30,7 +30,7 @@ public class FileUpLoadController {
 
 		 sdf = new SimpleDateFormat("yyyyMMddhhmmssSS");
 		 now = sdf.format(new Date());
-		 fileRoot = "C:\\eclipse\\workspace\\playBall\\src\\main\\webapp\\img\\matchBoard\\";
+		 fileRoot = "C:\\eclipes\\playBall\\src\\main\\webapp\\img\\matchBoard\\";
 		 saveFileName = now + mf.getOriginalFilename();
 		 uploadPath = fileRoot + saveFileName;
 		 
@@ -55,7 +55,7 @@ public class FileUpLoadController {
 		
 		sdf = new SimpleDateFormat("yyyyMMddhhmmssSS");
 		now = sdf.format(new Date());
-		fileRoot = "C:\\eclipse\\workspace\\playBall\\src\\main\\webapp\\img\\stadiumBoard\\";
+		fileRoot = "C:\\eclipes\\playBall\\src\\main\\webapp\\img\\stadiumBoard\\";
 		saveFileName = now + mf.getOriginalFilename();
 		uploadPath = fileRoot + saveFileName;
 		

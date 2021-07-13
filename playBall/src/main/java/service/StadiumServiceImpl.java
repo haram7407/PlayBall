@@ -12,8 +12,8 @@ import org.springframework.transaction.annotation.Transactional;
 import mapper.StadiumMapper;
 import vo.Page;
 import vo.StadiumVo;
-import vo.reservationPageVo;
-import vo.reservationVo;
+import vo.ReservationPageVo;
+import vo.ReservationVo;
 
 
 
@@ -51,7 +51,7 @@ public class StadiumServiceImpl implements StadiumService{
 	@Override
 	@Transactional(rollbackFor = Exception.class)
 	public void update(StadiumVo vo) {
-		String fileRoot = "C:\\eclipse\\workspace\\playBall2\\src\\main\\webapp\\img\\stadiumBoard\\";
+		String fileRoot = "C:\\eclipes\\playBall\\src\\main\\webapp\\img\\stadiumBoard\\";
 		String saveFileName = sm.findSaveFile(vo.getSerial());
 		try {
 			r = sm.update(vo);
@@ -91,7 +91,7 @@ public class StadiumServiceImpl implements StadiumService{
 	@Transactional
 	public int delete(String serial) {
 		r = 0;
-		String fileRoot = "C:\\eclipse\\workspace\\playBall2\\src\\main\\webapp\\img\\stadiumBoard\\";
+		String fileRoot = "C:\\eclipes\\playBall\\src\\main\\webapp\\img\\stadiumBoard\\";
 		String findSaveFile = sm.findSaveFile(serial);
 	    r = sm.deleteReservationTable(serial);
 		r = sm.delete(serial);
@@ -110,19 +110,19 @@ public class StadiumServiceImpl implements StadiumService{
 	}
 	
 	@Transactional
-	public List<String> viewRvationDay(reservationVo vo){
+	public List<String> viewRvationDay(ReservationVo vo){
 		List<String> viewRvationDay = sm.viewRvationDay(vo);
 		return viewRvationDay;
 	}
 	
 	@Transactional
-	public reservationVo viewReservationTime(reservationVo vo) {
-		reservationVo sendVo = sm.viewReservationTime(vo);
+	public ReservationVo viewReservationTime(ReservationVo vo) {
+		ReservationVo sendVo = sm.viewReservationTime(vo);
 		return sendVo;
 	}
 	
 	@Transactional
-	public int reservation(reservationVo vo) {
+	public int reservation(ReservationVo vo) {
 		r = sm.reservation(vo);
 		r = sm.reservationRecord(vo);
 		r = sm.payment(vo);
@@ -130,16 +130,16 @@ public class StadiumServiceImpl implements StadiumService{
 	}
 	
 	@Transactional
-	public List<reservationVo> moveMyReservation(reservationPageVo page) {
+	public List<ReservationVo> moveMyReservation(ReservationPageVo page) {
 		int totList = sm.myReservationTotList(page);
 		page.setTotList(totList);
 		page.compute();
-		List<reservationVo> list = sm.moveMyReservation(page);
+		List<ReservationVo> list = sm.moveMyReservation(page);
 		return list;
 	}
 	
 	@Transactional
-	public int cancelReservation(reservationVo vo) {
+	public int cancelReservation(ReservationVo vo) {
 		r = sm.cancelPay(vo);
 		r = sm.cancelReservationRecord(vo);
 		r = sm.cancelReservation(vo);

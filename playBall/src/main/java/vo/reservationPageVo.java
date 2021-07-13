@@ -1,6 +1,6 @@
 package vo;
 
-public class reservationPageVo {
+public class ReservationPageVo {
 	int totList;
 	int listSize=10;
 	int blockSize=5;

@@ -6,8 +6,8 @@ import org.apache.ibatis.annotations.Mapper;
 
 import vo.Page;
 import vo.StadiumVo;
-import vo.reservationPageVo;
-import vo.reservationVo;
+import vo.ReservationPageVo;
+import vo.ReservationVo;
 
 @Mapper
 public interface StadiumMapper {
@@ -19,18 +19,18 @@ public interface StadiumMapper {
 	public StadiumVo modify(String serial);
 	public int delete(String serial);
 	public String findSaveFile(String serial);
-	public List<String> viewRvationDay(reservationVo vo);
-	public reservationVo viewReservationTime(reservationVo vo);
+	public List<String> viewRvationDay(ReservationVo vo);
+	public ReservationVo viewReservationTime(ReservationVo vo);
 	public String findUserPoint(String mid);
     public String getStadiumSerial();
-    public int reservation(reservationVo vo);
-    public int reservationRecord(reservationVo vo);
-    public int payment(reservationVo vo);
-    public int myReservationTotList(reservationPageVo page);
-    public List<reservationVo> moveMyReservation(reservationPageVo page);
-    public int cancelPay(reservationVo vo);
-    public int cancelReservationRecord(reservationVo vo);
-    public int cancelReservation(reservationVo vo);
+    public int reservation(ReservationVo vo);
+    public int reservationRecord(ReservationVo vo);
+    public int payment(ReservationVo vo);
+    public int myReservationTotList(ReservationPageVo page);
+    public List<ReservationVo> moveMyReservation(ReservationPageVo page);
+    public int cancelPay(ReservationVo vo);
+    public int cancelReservationRecord(ReservationVo vo);
+    public int cancelReservation(ReservationVo vo);
     public int createMonth(String serial);
     public int createDay(String serial);
     public int findRecord(String serial);

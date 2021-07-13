@@ -109,9 +109,9 @@
 					<c:if test = "${sessionScope.mid eq tvo.mid }">
 						<input type = 'button' id = 'btnModify' value = '수정'/>
 						<input type = 'button' id = 'btnDelete' value = '팀 해체'/>
-						<input type = 'button' id = 'btnJoinList' onclick = "funcJoinList('${param.serial}','${tvo.tid }')" value = '신청목록'/>
 					</c:if>
 					<input type = 'button' id = 'btnBye' value = '팀 탈퇴'/>
+					<input type = 'button' id = 'btnJoinList' onclick = "funcJoinList('${param.serial}','${tvo.tid }')" value = '신청목록'/>
 				</c:when>
 				<c:when test="${sessionScope.tid eq null }">
 					<input type = 'button' id = 'btnJoin' value = '가입신청'/>

@@ -4,8 +4,8 @@
    
     <!-- 매칭횟수 랭크찾기  -->
     <select id="findTeamRank" resultType="vo.TeamVo">
-      SELECT teamRank.mid mid,teamRank.serial serial, teamRank.pic pic, teamRank.tid tid, teamRank.cntmatch CNTMATCH, teamRank.serial serial, teamRank.teamRANK rno from(
-		SELECT serial,pic,tid,mid,CNTMATCH,ROW_NUMBER() over(ORDER BY CNTMATCH desc) teamRank FROM team ORDER BY teamRank, tid
+      SELECT teamRank.serial serial, teamRank.pic pic, teamRank.tid tid, teamRank.cntmatch CNTMATCH, teamRank.serial serial, teamRank.teamRANK rno,teamRank.mid from(
+		SELECT serial,pic,tid,CNTMATCH,ROW_NUMBER() over(ORDER BY CNTMATCH desc) teamRank,mid FROM team ORDER BY teamRank, tid
 		)teamRank WHERE teamRank BETWEEN 1 AND 5
     </select>
    
@@ -13,7 +13,7 @@
    	<select id='recentStadium' resultType='vo.StadiumVo'>
 		select * from 
 		(SELECT rownum num, n.* FROM
-		(SELECT * FROM MAP ORDER BY serial desc) n
+		(SELECT * FROM MAP ORDER BY name asc) n
 		) where num BETWEEN 1 AND 5
 	</select>
 	

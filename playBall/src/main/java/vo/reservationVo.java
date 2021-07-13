@@ -1,6 +1,6 @@
 package vo;
 
-public class reservationVo {
+public class ReservationVo {
 private String serial;
 private String stadiumName;
 private String reservationId;

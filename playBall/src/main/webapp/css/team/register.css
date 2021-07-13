@@ -79,7 +79,3 @@ input[type='button']:hover, input[type='button']:hover{
 	color: #fff;
 	transition: all 0.5s;
 }
-
-#image{
-	display:none;
-}

@@ -37,7 +37,7 @@ String saveDir;
 @Transactional(rollbackFor = Exception.class)
 public int boardRegister(MatchVo vo,List<String> imageList) {
      
-	saveDir = "C:\\eclipse\\workspace\\playBall2\\src\\main\\webapp\\img\\matchBoard\\";
+	saveDir = "C:\\eclipes\\playBall\\src\\main\\webapp\\img\\matchBoard\\";
      
      try {
     	 
@@ -87,7 +87,7 @@ public int boardRegister(MatchVo vo,List<String> imageList) {
 	@Transactional(rollbackFor = Exception.class)
 	public int updateBoard(MatchVo vo,List<String> imageList)  {
 	
-		 saveDir = "C:\\eclipse\\workspace\\playBall2\\src\\main\\webapp\\img\\matchBoard\\";
+		 saveDir = "C:\\eclipes\\playBall\\src\\main\\webapp\\img\\matchBoard\\";
 		 
 		 try {
 			int updateResult = mMapper.updateBoard(vo);
@@ -140,8 +140,8 @@ public void updateHit(int serial) {
 		  
 		  if(!image.equals("")) {
 		  String doc = vo.getDoc();
-		  saveDir = "C:\\eclipse\\workspace\\playBall2\\src\\main\\webapp\\img\\matchBoard\\";
-		  String[] imageArray = image.split(",");       //배열을 리스트로 바꿔주는 메소드 타입이 같아야함                                          //래퍼타입 자동 형변환안되서 int integer안되고 integer integer 식으로 같게 처음부터 만들어야함
+		  saveDir = "C:\\eclipes\\playBall\\src\\main\\webapp\\img\\matchBoard\\";
+		  String[] imageArray = image.split(",");                                             
 		  imageList = new ArrayList<String>(Arrays.asList(imageArray));
 		  
 		  //썸머노트로 업로드된 이미지명 중 게시판 내용에 있는 이미지 외의 이미지 제거
@@ -164,7 +164,7 @@ public void cancelFile(String image) {
 	
    List<String> imageList = new ArrayList<String>();
    
-   saveDir = "C:\\eclipse\\workspace\\playBall2\\src\\main\\webapp\\img\\matchBoard\\";
+   saveDir = "C:\\eclipes\\playBall\\src\\main\\webapp\\img\\matchBoard\\";
    
    String[] imageArray = image.split(",");                                    
    imageList = new ArrayList<String>(Arrays.asList(imageArray));
@@ -230,7 +230,7 @@ private int confirmLeftImg(MatchVo vo) {
 	
 	String doc = vo.getDoc();
 	int serial = vo.getSerial();
-	saveDir = "C:\\eclipse\\workspace\\playBall2\\src\\main\\webapp\\img\\matchBoard\\";
+	saveDir = "C:\\eclipes\\playBall\\src\\main\\webapp\\img\\matchBoard\\";
 	
 	//수정시 매칭게시판에 잇는 모든 이미지명을 찾음
 	List<String> saveFileName = mMapper.findFileName(serial);
@@ -271,7 +271,7 @@ public List<String> findFileName(int serial) {
 @Transactional
 public int deleteBoard(int serial,List<String> saveFileName) {
 
-	saveDir = "C:\\eclipse\\workspace\\playBall2\\src\\main\\webapp\\img\\matchBoard\\";
+	saveDir = "C:\\eclipes\\playBall\\src\\main\\webapp\\img\\matchBoard\\";
 	
 	//게시판 정보 삭제
 	r = mMapper.deleteBoard(serial);
@@ -410,7 +410,6 @@ public int updateCancelVs(int serial,int replSerial) {
 		//게시판
 		r = mMapper.updateCancel(serial);
 	}
-	System.out.println(r);
 	return r;
 }
 

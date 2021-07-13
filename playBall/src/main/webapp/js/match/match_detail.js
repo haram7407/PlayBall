@@ -199,15 +199,15 @@ function matchApply(sessionMid,mid,replWriterMid,replSerial,replVs) {
 			               url : "matchApply.matching",
 			               success : function(resp){
 					           if( resp.result == true ) {
-					               alert("신청완료되었습니다.");
+					               alert("신청완료되었습니다!");
 					               $("#pageBox").load("matchingDetail.matching",data);
 					           } else {
-				                  alert("신청 실패");
+				                  alert("신청 실패!");
 					           }
 			               } 
 		                 })
 					} else {
-						alert("이미 매칭신청된 게시판입니다.");
+						alert("이미 매칭신청된 게시판입니다!");
 					}		
 				}
 			  })
@@ -219,15 +219,15 @@ function matchApply(sessionMid,mid,replWriterMid,replSerial,replVs) {
 				url : "replCancelMatch.matching",
 				success : function(resp) {
 				  if( resp.result == true ) {
-					alert("신청취소되었습니다.");
+					alert("신청취소되었습니다!");
 					$("#pageBox").load("matchingDetail.matching",data);
 				  }	else {
-					alert("취소 실패");
+					alert("취소 실패!");
 				  }
 				}
 			})
 		} 
   } else {
-	alert("작성자만 신청가능합니다.");
+	alert("작성자만 신청가능합니다~");
   }
 }

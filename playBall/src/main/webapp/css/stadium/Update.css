@@ -45,10 +45,6 @@
 	height:380px;
 }
 
-#attfile{
-	display:none;
-}
-
 /*제목(JSP 에 label 추가요)*/ 
 #doc label{
 	font-family: 'twayair';
@@ -146,4 +142,8 @@
   box-shadow: 0px 15px 20px rgba(240, 130, 71, 0.4);
   color: #fff;
   transform: translateY(-7px);
+}
+
+#attfile{
+	display : none;
 }

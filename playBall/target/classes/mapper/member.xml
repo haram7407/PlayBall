@@ -72,8 +72,8 @@ select tid from member where mid = #{_parameter}
           address2 = #{address2}, email = #{email}, posit = #{posit}
         </when>
         <when test="password != null">
-          name = #{name}, ps =#{ps} ,password = #{password}, phone = #{phone}, post = #{post}, address = #{address},
-          address2 = #{address2}, email = #{email}, posit = #{posit}
+          name = #{name}, ps =#{ps} ,password = #{password}, phone = #{phone}, post = #{post},
+          address = #{address}, address2 = #{address2}, email = #{email}, posit = #{posit}
         </when>
         </choose>
         </set>

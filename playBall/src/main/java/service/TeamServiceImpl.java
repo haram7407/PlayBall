@@ -14,7 +14,10 @@ import javax.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.support.SessionStatus;
 import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.servlet.ModelAndView;
 
 import mapper.Team;
 import vo.MatchRecordVo;
@@ -38,7 +41,7 @@ public class TeamServiceImpl implements TeamService {
 		String uploadPath = "";
 		SimpleDateFormat sdf = new SimpleDateFormat("yyyyMMddhhmmssSS");
 		String date = sdf.format(new Date());
-		String fileRoot = "C:\\eclipse\\workspace\\playBall\\src\\main\\webapp\\img\\";
+		String fileRoot = "C:\\eclipes\\playBall\\src\\main\\webapp\\img\\";
         String uploadName = date + mf.getOriginalFilename();
         uploadPath = fileRoot + uploadName;
 		
@@ -78,13 +81,11 @@ public class TeamServiceImpl implements TeamService {
 			 String tid = bringTid(serial);
 			 tVo = teamMapper.bringUserInfo(mid);
 			 tVo.setTid(tid);
-			 System.out.println("tid : "+tVo.getTid());
 			 insertTeam = teamMapper.insertTeamMember(tVo);
 			 if(insertTeam> 0) {
-				 System.out.println("멤버등록완료");
 				 insertTeam = 0;
 				 insertTeam = teamMapper.updateTid(tVo);
-				 int delete = teamMapper.deleteOtherJoin(mid);
+				 int delete = teamMapper.deleteOtherJoin(mid);//
 				 if(insertTeam > 0) {
 					 TeamVo vo = countMember(tid);
 					 int cntMemberResult = cntMemberUpdate(vo);
@@ -134,13 +135,13 @@ public class TeamServiceImpl implements TeamService {
 	}
 	
 	@Transactional
-	public int deleteMember(TeamMemberVo vo,HttpSession session) {
+	public int deleteMember(TeamMemberVo vo,HttpSession session,@ModelAttribute("tid")String tid,SessionStatus sessionStatus,ModelAndView mv) {
 		r = teamMapper.deleteMember(vo);
 		r = teamMapper.deleteMyTeam(vo);
 		r = teamMapper.cntMemberUpdateM(vo);
 		
 		if(r>0) {
-			session.removeAttribute("tid");
+			sessionStatus.setComplete();
 		}
 		TeamVo selectLeader = teamMapper.selectLeader(vo.getTid());
 		r = teamMapper.updateLeader(selectLeader);
@@ -155,6 +156,7 @@ public class TeamServiceImpl implements TeamService {
 		r = teamMapper.deleteAllMember(tid);
 		r = teamMapper.deleteAllMyTeam(tid);
 		r = point.payPoints(mid);
+		
 		return r;
 	}
 	
@@ -176,7 +178,7 @@ public class TeamServiceImpl implements TeamService {
 	
 	@Transactional
 	public int modifyTeam(TeamVo vo) {
-		String fileRoot = "C:\\eclipse\\workspace\\playBall2\\src\\main\\webapp\\img\\";
+		String fileRoot = "C:\\eclipes\\playBall\\src\\main\\webapp\\img\\";
 		String saveFileName = teamMapper.findSaveFileName(vo.getTid());
 
 		try {
@@ -206,12 +208,9 @@ public class TeamServiceImpl implements TeamService {
 			//검색어관련 총페이지 찾기
 			int totList = teamMapper.totListTeam(page);
 			page.setTotList(totList);
-			System.out.println(totList);
 			page.compute();
 			int totPage = page.getTotPage();
-			System.out.println("totPage : "+ totPage);
 			list = teamMapper.selectTeam(page);
-			System.out.println(list.get(0).getPic());
 		}catch(Exception ex) {
 			ex.printStackTrace();
 		}
@@ -240,7 +239,6 @@ public class TeamServiceImpl implements TeamService {
 		boolean bool = false;
 		TeamMemberVo jVo = new TeamMemberVo();
 		String tid = bringTid(serial);
-		System.out.println("가져온 tid : "+ tid);
 		jVo.setTid(tid);
 		jVo.setMid(mid);
 		r = teamMapper.checkJoinList(jVo);
@@ -262,12 +260,8 @@ public class TeamServiceImpl implements TeamService {
 			 String tid = bringTid(serial);
 			 tVo = teamMapper.bringUserInfo(mid);
 			 tVo.setTid(tid);
-			 System.out.println("tid : "+tVo.getTid());
-			 System.out.println("mid : "+tVo.getMid());
-			 System.out.println("mType : "+tVo.getmType());
 			 insertJoin = teamMapper.insertJoinMember(tVo);
 			 if(insertJoin> 0) {
-				 System.out.println("가입신청완료");
 				 bool = true;
 			 }else {
 				 bool = false;
@@ -286,10 +280,8 @@ public class TeamServiceImpl implements TeamService {
 			//검색어관련 총페이지 찾기
 			int totList = teamMapper.totListJoin(tid);
 			page.setTotList(totList);
-			System.out.println(totList);
 			page.compute();
 			int totPage = page.getTotPage();
-			System.out.println("totPage : "+ totPage);
 			page.setFindStr(tid);
 			list = teamMapper.selectJoinList(page);
 		}catch(Exception ex) {
@@ -309,7 +301,6 @@ public class TeamServiceImpl implements TeamService {
 		int update = teamMapper.acceptMember(tvo);
 		update = teamMapper.updateTid(tvo);
 		if(update>0) {
-			System.out.println("가입자 정보 변경 완료");
 			try {
 				int delete = teamMapper.deleteOtherJoin(mid);
 				try {
@@ -329,7 +320,6 @@ public class TeamServiceImpl implements TeamService {
 				bool = false;
 			}
 		}else {
-			System.out.println("가입자 정보 변경 실패");
 			bool = false;
 		}
 		return bool;
@@ -350,7 +340,6 @@ public class TeamServiceImpl implements TeamService {
 		tvo.setTid(tid);
 		tvo.setMid(mid);
 		delete = teamMapper.rejectJoinMember(tvo);
-		System.out.println("Join delete : "+delete);
 		return delete;
 	}//teammember테이블에서 삭제
 	

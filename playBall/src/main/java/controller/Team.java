@@ -120,9 +120,9 @@ public class Team {
 	
 	//팀 탈퇴하기
 	@RequestMapping(value ="deleteTeamMember.team",method= {RequestMethod.GET,RequestMethod.POST})
-	public String deleteTeamMember(TeamMemberVo vo,HttpSession session, @ModelAttribute("tid")String tid, SessionStatus sessionstatus) {
+	public String deleteTeamMember(TeamMemberVo vo,HttpSession session,@ModelAttribute("tid")String tid,SessionStatus sessionStatus,ModelAndView mv) {
 		
-		r = TeamService.deleteMember(vo,session);
+		r = TeamService.deleteMember(vo,session,tid,sessionStatus,mv);	
 		
 		if(r>0) {
 			json.addProperty("result", true);
@@ -131,25 +131,24 @@ public class Team {
 		}
 		
 		String result = json.toString();
-		sessionstatus.setComplete();//sessionTid 삭제
 		
 		return result;
 	}
 	
 	//팀해체하기
 	@RequestMapping(value="dismantleTeam.team",method= {RequestMethod.GET,RequestMethod.POST})
-	public String dismantleTeam(@RequestParam("tid")String tid,@RequestParam("lmid")String mid, @ModelAttribute("tid")String Tid, SessionStatus sessionstatus) {
+	public String dismantleTeam(@RequestParam("tid")String tid,@RequestParam("lmid")String mid,@ModelAttribute("tid")String teamId,SessionStatus sessionStatus) {
 		
 		r = TeamService.dismantleTeam(tid,mid);
 
 		if(r>0) {
 			json.addProperty("result", true);
+            sessionStatus.setComplete();			
 		} else {
 			json.addProperty("result", false);
 		}
 		
 		String result = json.toString();
-		sessionstatus.setComplete();//sessionTid 삭제
 		
 		return result;
 	}
@@ -297,10 +296,8 @@ public class Team {
 			if(update>0) {
 				cntMember = vo.getCntMember();
 				if(cntMember>=5) {
-					System.out.println("멤버수 : "+cntMember);
 					json.addProperty("result", false);
 				} else {
-					System.out.println("멤버수 : "+cntMember);
 					json.addProperty("result", true);
 				}
 			}else {

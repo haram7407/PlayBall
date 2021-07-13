@@ -1,11 +1,6 @@
 /**
  * 
  */
- 
- signUp = {};
- 
- signUp.init = function(){
-	
 /*비밀번호 TEXT로 변경해서 확인 */
 let duplicatedId = false; 
 let confirmPwd = false;
@@ -48,23 +43,24 @@ $("#signBtn").click(function(){
 	let phoneConfirmResult = phoneRegexConfirm(phone);
 	let emailConfirmResult = confirmEmailRegex(email);
 	let passwordConfirmResult = confirmPasswordRegex(password);
+	console.log(phoneConfirmResult);
 	
 	if( passwordConfirmResult == false ) {
-		alert ( "패스워드 형식을 맞춰주세요" );
+		alert ( "패스워드 형식을 맞춰주세요." );
 		$(form.password).focus();	
 	} else if( phoneConfirmResult == false ) {
-		alert ( "핸드폰형형식을 맞춰주세요" );
+		alert ( "핸드폰형형식을 맞춰주세요." );
 		$(form.phone).focus();
 	} else if( post == "") {
-		alert ( "주소를 입력해주세요" );
+		alert ( "주소를 입력해주세요." );
 		$(form.post).focus();
 	} else if ( emailConfirmResult == false ) {
-		alert ( "이메일 형식을 맞춰주세요" );
+		alert ( "이메일 형식을 맞춰주세요." );
 		$(form.email).focus();
 	} else if ( duplicatedId == false ) {
-		alert ( "아이디중복체크를 해주세요" );
+		alert ( "아이디중복체크를 해주세요." );
 	} else if ( confirmPwd == false ) {
-		alert ( "비밀번호가 다릅니다" )
+		alert ( "비밀번호가 다릅니다!" )
 	} else {
 	    const data = $(form).serialize();
 		$.ajax ({
@@ -73,6 +69,7 @@ $("#signBtn").click(function(){
 		  url : "insert.member",
 		  dataType : "json",
 		  success : function(resp) {
+			duplicatedId = false;
 		  $("#pageBox").load("./page/member/logForm.jsp");
 		  }
 	    });
@@ -85,25 +82,20 @@ $("#duplicatedId").click(function() {
 	const id = $(form.mid).val();
 	let idConfirmResult = confirmIdRegex(id);
 	if( idConfirmResult == false ){
-		alert("아이디 형식에 맞춰주세요")
+		alert("아이디 형식에 맞춰주세요~~")
 	} else {
-	
-			
 		const data = $(form).serialize();
-		
 		$.ajax({
 			type : 'POST',
 			data : data,
 			dataType : "json",
 			url : "duplicatedId.member",
 			success : function(resp){
-				
 				switch(resp.result){
 					case false : 
 					duplicatedId = false;
 					alert ( "중복된 아이디 입니다." );
 					break;
-					
 					case true :
 					alert ( "사용가능한 아이디 입니다." ); 
 					duplicatedId = true;
@@ -111,7 +103,7 @@ $("#duplicatedId").click(function() {
 				}	
 			}
 		})
-  }
+   }
 })
 
 /*비밀번호 확인 */
@@ -171,7 +163,5 @@ function confirmPasswordRegex(password) {
 	const passwordRegex = /^(?=.*[A-Za-z])(?=.*\d)(?=.*[$@$!%*#?&])[A-Za-z\d$@$!%*#?&]{8,}$/;
     let confirmPasswordRegex = passwordRegex.test(password);
     return confirmPasswordRegex;
-}
-
 }
 
